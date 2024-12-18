@@ -1,0 +1,6 @@
+@Real_time_events_HostAddress = http://localhost:5145
+
+GET {{Real_time_events_HostAddress}}/weatherforecast/
+Accept: application/json
+
+###
