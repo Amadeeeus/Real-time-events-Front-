@@ -24,10 +24,6 @@
     </ItemGroup>
 
     <ItemGroup>
-      <Folder Include="Application\DTOs\" />
-      <Folder Include="Domain\Enums\" />
-      <Folder Include="Infrastructure\Repositories\" />
-      <Folder Include="Presentation\Controllers\" />
       <Folder Include="Presentation\Filters\" />
       <Folder Include="Presentation\Middlewares\" />
       <Folder Include="Shared\Constansts\" />
