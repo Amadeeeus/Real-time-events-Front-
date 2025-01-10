@@ -5,6 +5,6 @@ namespace Application.Services;
 
 public interface IMessageService
 {
-    Task<IEnumerable<MessageDto>> GetMessagesAsync(int userId);
-    Task SendMessageAsync(Guid messageDtoSenderId, Guid messageDtoReceiverId, string messageDtoMessageContent, MessageType messageDtoMessageType);
+    Task<IEnumerable<MessageDto>> GetMessagesAsync(string userId);
+    Task SendMessageAsync(string messageDtoSenderId, string messageDtoReceiverId, string messageDtoMessageContent, MessageType messageDtoMessageType);
 }

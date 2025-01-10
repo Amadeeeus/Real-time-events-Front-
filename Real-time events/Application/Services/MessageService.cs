@@ -18,31 +18,26 @@ namespace Real_time_events.Application.Services
             _connectionManager = connectionManager;
         }
 
-        public async Task<IEnumerable<MessageDto>> GetMessagesAsync(int userId)
+        public async Task<IEnumerable<MessageDto>> GetMessagesAsync(string userId)
         {
             var messages = await _messageRepository.GetMessagesByUserIdAsync(userId);
             return messages.Select(m => new MessageDto
             {
                 Id = m.Id,
                 Content = m.Content,
-                UserId = m.UserId,
+                UserId = m.ReceiverId,
                 SentAt = m.SentAt,
                 Type = m.Type
             });
         }
 
-        public Task SendMessageAsync(Guid messageDtoSenderId, Guid messageDtoReceiverId, string messageDtoMessageContent,
-            MessageType messageDtoMessageType)
-        {
-            throw new NotImplementedException();
-        }
-
-        public async Task SendMessageAsync(string content, int userId, MessageType type)
+        public async Task SendMessageAsync(string senderId, string receiverId, string content, MessageType type)
         {
             var message = new Message
             {
                 Content = content,
-                UserId = userId,
+                SenderId = senderId,
+                ReceiverId = receiverId,
                 SentAt = DateTime.UtcNow,
                 Type = type
             };

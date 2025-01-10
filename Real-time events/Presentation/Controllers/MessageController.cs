@@ -18,7 +18,7 @@ namespace Presentation.Controllers
         }
 
         [HttpGet("{userId}")]
-        public async Task<IActionResult> GetMessages(int userId)
+        public async Task<IActionResult> GetMessages(string userId)
         {
             var messages = await _messageService.GetMessagesAsync(userId);
             return Ok(messages);
@@ -27,31 +27,8 @@ namespace Presentation.Controllers
         [HttpPost]
         public async Task<IActionResult> SendMessage([FromBody] SendMessageDto messageDto)
         {
-            if (messageDto == null)
-            {
-                return BadRequest("Message data is invalid.");
-            }
-
-            // Проверка на валидность данных
-            if (string.IsNullOrWhiteSpace(messageDto.MessageContent))
-            {
-                return BadRequest("Message content cannot be empty.");
-            }
-
-            try
-            {
-                // Вызов метода для отправки сообщения
                 await _messageService.SendMessageAsync(messageDto.SenderId, messageDto.ReceiverId, messageDto.MessageContent, messageDto.MessageType);
-
-                // Возвращаем статус успеха
                 return Ok(new { message = "Message sent successfully" });
-            }
-            catch (Exception ex)
-            {
-                // Логируем ошибку и возвращаем ошибку
-                _logger.LogError(ex, "Error occurred while sending message.");
-                return StatusCode(500, "An error occurred while processing your request.");
-            }
         }
 
     }
